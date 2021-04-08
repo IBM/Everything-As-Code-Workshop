@@ -358,28 +358,28 @@ One of the benefits of using AWX/Ansible Tower is the ability to launch jobs via
 
 1. Let's construct our `curl` request. Copy and paste the curl command below into a scratch pad or text file so that it is easy to modify.
 
-    ```bash
-    curl -X POST \
-    AWX_ROUTE/api/v2/workflow_job_templates/JOB_TEMPLATE_NUMBER/launch/ \
-    -H 'Authorization: Bearer AWX_TOKEN' \
-    -H 'Content-Type: application/json' \
-    -d '{
-        "extra_vars": {
-            "cluster_name": "CLUSTER_NAME"
-        }
+```bash
+curl -X POST \
+AWX_ROUTE/api/v2/workflow_job_templates/JOB_TEMPLATE_NUMBER/launch/ \
+-H 'Authorization: Bearer AWX_TOKEN' \
+-H 'Content-Type: application/json' \
+-d '{
+    "extra_vars": {
+        "cluster_name": "CLUSTER_NAME"
     }
-    '
-    ```
+}
+'
+```
 
-    Replace the following:
+Replace the following:
 
-    - AWX_ROUTE - This is the address of the link that you clicked on to access AWX. You can find it by going to the OpenShift Console and looking at the route in the awx project.
+- AWX_ROUTE - This is the address of the link that you clicked on to access AWX. You can find it by going to the OpenShift Console and looking at the route in the awx project.
 
-    - JOB_TEMPLATE_NUMBER - This is the workflow job template number that we got in step 3 above.
+- JOB_TEMPLATE_NUMBER - This is the workflow job template number that we got in step 3 above.
 
-    - AWX_TOKEN - This is the personal access token we just created in AWX for the Admin user.
+- AWX_TOKEN - This is the personal access token we just created in AWX for the Admin user.
 
-    - CLUSTER_NAME - This is the name of the cluster you were assigned. You can find this on IBM Cloud.
+- CLUSTER_NAME - This is the name of the cluster you were assigned. You can find this on IBM Cloud.
 
 1. Once you have all of the values replaced in your curl command, copy and paste it into your terminal environment and press enter.
 
