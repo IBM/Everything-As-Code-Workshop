@@ -20,8 +20,7 @@ The introductory page of the workshop is broken down into the following sections
 
 |  |  |
 | :--- | :--- |
-| [Lab 0: Pre-work](pre-work/README.md) | Pre-work for the project |
-| [Lab 1: Some Title](lab-1/README.md) | Exercise to do the thing |
+| [Lab 1: IaC and Config Management](IaC-and-config-management/README.md) | Exercise to do the thing |
 
 ## Compatibility
 
