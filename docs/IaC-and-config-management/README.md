@@ -64,7 +64,7 @@ Now we need to get an IBM Cloud api key to access our account from the terminal.
 
 1. Then select `API keys` on the left of the page.
 
-1. Click on the `Create an IBM Cloud API key` button. Name the key `awx` or whatever you wish.
+1. Click on the `Create an IBM Cloud API key` button. Name the key `awx` or whatever you wish. Click `create`.
 
 1. Then, click on the `Copy` button to copy the new key. Paste this key in a temporary doc for now or save it in a key manager. We will use this later.
 
@@ -77,10 +77,25 @@ Now we need to get an IBM Cloud api key to access our account from the terminal.
 1. In your terminal enviroment, create an environment variable to hold your api key
 
     ```bash
-    export IC_API_KEY={api key here}
+    export IC_API_KEY=api key here
     ```
 
+    Press enter.
+
     This will be used by our ansible playbook.
+
+### Cloning the repo
+
+1. In the terminal environment, run the following commands:
+
+
+    ```bash
+    cd ~
+
+    git clone https://github.com/odrodrig/ansible-playbooks.git
+
+    cd ansible-playbooks/playbooks
+    ```
 
 ## 2. Running Ansible Playbooks
 
@@ -91,14 +106,16 @@ Playbooks allow users to script out tasks to be automated. You can run them by c
 1. Run the ansible playbook `helloWorld` by running the following command:
 
     ```bash
-    ansible-playbook helloWorld.yml
+    ansible-playbook helloWorld.yml -v
     ```
 
 ## 3. Installing AWX
 
-1. From your terminal, run the following command to install the AWX operator:
+1. From your terminal, run the following commands to install the AWX operator replacing `cluster name here` with the cluster name that you were assigned:
 
     ```bash
+    echo "cluster_name: cluster name here" > vars.yml
+
     ansible-playbook installAWX.yml -v
     ```
 
@@ -260,22 +277,22 @@ In our AWX instance, each job run will run in a separate container on our cluste
 
 1. In the custom pod spec field, overwrite what's there and paste in the following **but do not save yet**:
 
-    ```yaml
-    apiVersion: v1
-    kind: Pod
-    metadata:
-    namespace: awx
-    spec:
-    containers:
-        - image: docker.io/odrodrig/ibmcloud-ee:0.3
-        name: worker
-        env:
-            - name: IC_API_KEY
-            value: "xxxx"
-        args:
-            - ansible-runner
-            - worker
-    ```
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: awx
+spec:
+  containers:
+    - image: docker.io/odrodrig/ibmcloud-ee:0.3
+      name: worker
+      env:
+        - name: IC_API_KEY
+          value: "xxx"
+      args:
+        - ansible-runner
+        - worker
+```
 
 1. In the custom pod spec that was just pasted in, add your IBM Cloud api key to the `value` property of the `IC_API_Key` env variable replacing the `xxxx`.
 
